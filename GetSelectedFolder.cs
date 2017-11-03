@@ -1,6 +1,9 @@
 using UnityEngine;
 using UnityEditor;
 
+using System;
+using System.Reflection;
+
 public class EditorExt{
 
     private static EditorWindow GetWindowByName(string pName) {
@@ -17,8 +20,8 @@ public class EditorExt{
         if(projectWindow != null) {
             //Since this was an internal type of UnityEditor assembly, I need to pass the class and the assembly that the class belongs to Type.GetType.
             Type t = Type.GetType("UnityEditor.ProjectBrowser,UnityEditor");
-            selectedFolder = (t.GetField("m_LastFolders", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_projectWindow) as string[])[0];
-            //selectedFolder = t.GetField("m_SelectedPath", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(_projectWindow) as string;
+            selectedFolder = (t.GetField("m_LastFolders", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(projectWindow) as string[])[0];
+            //selectedFolder = t.GetField("m_SelectedPath", BindingFlags.NonPublic | BindingFlags.Instance).GetValue(projectWindow) as string;
             //selectedFolder = AssetDatabase.GetAssetPath(Selection.activeObject);
         }
         return selectedFolder;
