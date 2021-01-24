@@ -26,4 +26,18 @@ public class EditorExt{
         }
         return selectedFolder;
     }
+
+    public static string GetSelectedFolder2()
+    {
+        string clickedAssetGuid = Selection.assetGUIDs[0];
+        string clickedPath = AssetDatabase.GUIDToAssetPath(clickedAssetGuid);
+        if (System.IO.Directory.Exists(clickedPath))
+        {
+            //Folder
+        }
+        else
+        {
+            //File
+        }
+    }
 }
